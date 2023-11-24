@@ -30,7 +30,7 @@ class BookService implements BookServiceInterface{
   }
 
   @override
-  Future<String> downloadBook(String url) async {
+  Future<String> downloadBook(String url, int bookId) async {
 
     final status = await Permission.storage.request();
 
@@ -38,7 +38,7 @@ class BookService implements BookServiceInterface{
 
       Directory? appDocDir = Platform.isAndroid ? await getExternalStorageDirectory() : await getApplicationDocumentsDirectory();
 
-      String path = '${appDocDir!.path}/sample.epub';
+      String path = '${appDocDir!.path}/book_$bookId.epub';
 
       final dio = Dio();
 

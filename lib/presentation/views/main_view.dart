@@ -2,9 +2,6 @@ import 'package:escribo_desafio_2/domain/providers/book_state_notifier.dart';
 import 'package:escribo_desafio_2/presentation/widgets/grid_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:vocsy_epub_viewer/epub_viewer.dart';
-
-import '../../domain/models/book_model.dart';
 
 class MainView extends StatefulWidget {
   const MainView({Key? key}) : super(key: key);
@@ -51,15 +48,6 @@ class MainViewState extends State<MainView> {
     return bookGridWidget(
       books: books,
       bookNotifier: bookNotifier,
-      onTapFunction: (BookModel book) async {
-        if(context.mounted){
-          ScaffoldMessenger.of(context).showSnackBar(
-              const SnackBar(content: Text('Abrindo arquivo..',style: TextStyle(color: Colors.black),),duration: Duration(seconds: 1), backgroundColor: Colors.amber));
-        }
-        final path = await bookNotifier.downloadBook(book.downloadUrl, book.id);
-
-        VocsyEpub.open(path);
-      },
     );
   }
 
@@ -69,14 +57,6 @@ class MainViewState extends State<MainView> {
     return bookGridWidget(
       books: favoriteBooks,
       bookNotifier: bookNotifier,
-      onTapFunction: (BookModel book) async {
-        if(context.mounted){
-          ScaffoldMessenger.of(context).showSnackBar(
-              const SnackBar(content: Text('Abrindo arquivo..',style: TextStyle(color: Colors.black),),duration: Duration(seconds: 1), backgroundColor: Colors.amber));
-        }
-        final path = await bookNotifier.downloadBook(book.downloadUrl, book.id);
-        VocsyEpub.open(path);
-      },
     );
   }
 }

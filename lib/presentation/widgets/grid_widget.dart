@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:vocsy_epub_viewer/epub_viewer.dart';
 import '../../domain/models/book_model.dart';
 import '../../domain/providers/book_state_notifier.dart';
 
 Widget bookGridWidget({
   required List<BookModel> books,
   required BookStateNotifier bookNotifier,
-  void Function(BookModel book)? onTapFunction,
 })  {
   return Padding(
     padding: const EdgeInsets.only(top: 8.0),
@@ -45,7 +45,15 @@ Widget bookGridWidget({
                   child: Padding(
                     padding: const EdgeInsets.only(top: 8.0),
                     child: InkWell(
-                      onTap: () => onTapFunction?.call(book),
+                      onTap:  () async {
+                        if(context.mounted){
+                          ScaffoldMessenger.of(context).showSnackBar(
+                              const SnackBar(content: Text('Abrindo arquivo..',style: TextStyle(color: Colors.black),),duration: Duration(seconds: 1), backgroundColor: Colors.amber));
+                        }
+                        final path = await bookNotifier.downloadBook(book.downloadUrl, book.id);
+
+                        VocsyEpub.open(path);
+                      },
                       child: Image.network(
                         book.coverUrl,
                         loadingBuilder:

@@ -7,7 +7,7 @@ import 'package:escribo_desafio_2/domain/models/book_service_interface.dart';
 
 import 'book_service.dart';
 
-class BookServiceRepository implements BookServiceRepositoryInterface {
+class BookServiceRepository implements BookServiceInterface {
   BookServiceRepository({required this.bookService, required this.bookDatabaseRepository});
 
   final BookService bookService;
@@ -23,12 +23,10 @@ class BookServiceRepository implements BookServiceRepositoryInterface {
     String? localPath = await bookDatabaseRepository.getLocalPath(bookId);
 
     if (localPath != null && await File(localPath).exists()) {
-      print("Abrindo Localmente!");
       return localPath;
     } else{
-      String downloadedPath = await bookService.downloadBook(url);
+      String downloadedPath = await bookService.downloadBook(url, bookId);
       await bookDatabaseRepository.saveBookPath(bookId, downloadedPath);
-      print("Abrindo Remotamente!");
       return downloadedPath;
     }
   }

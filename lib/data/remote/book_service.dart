@@ -5,10 +5,10 @@ import 'package:escribo_desafio_2/utils/constants/url.dart';
 import 'package:http/http.dart' as http;
 import '../../domain/models/book_model.dart';
 import '../../domain/models/book_service_interface.dart';
+import '../../utils/configs/android_version.dart';
 import '../../utils/service_errors/api_exceptions.dart';
 import 'package:dio/dio.dart';
 import 'package:path_provider/path_provider.dart';
-import 'package:permission_handler/permission_handler.dart';
 
 class BookService implements BookServiceInterface{
 
@@ -32,9 +32,7 @@ class BookService implements BookServiceInterface{
   @override
   Future<String> downloadBook(String url, int bookId) async {
 
-    final status = await Permission.storage.request();
-
-    if (status.isGranted) {
+    if(await AndroidVersion.fetchAndroidVersion()){
 
       Directory? appDocDir = Platform.isAndroid ? await getExternalStorageDirectory() : await getApplicationDocumentsDirectory();
 
@@ -60,4 +58,5 @@ class BookService implements BookServiceInterface{
       return 'Permissão de armazenamento negada';
     }
   }
+
 }

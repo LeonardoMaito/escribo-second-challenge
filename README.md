@@ -1,16 +1,30 @@
-# escribo_desafio_2
+# Escribo Desafio 2
 
-A new Flutter project.
+##  Introdução
 
-## Getting Started
+Um aplicativo para leitura de eBooks que ofereça uma experiência interativa e fácil de usar para os usuários
+O aplicativo deve ser capaz de baixar uma lista de livros e suas capas deste link, exibir as capas em uma estante virtual, permitir o download de livros e a leitura dos mesmos utilizando um plugin específico
 
-This project is a starting point for a Flutter application.
+## Pré Requisitos
 
-A few resources to get you started if this is your first Flutter project:
+Você vai precisar de um emulador ou dispositivo físico para executar o aplicativo.
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+Versões:
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+    Flutter 3.13.8 - channel stable
+    Dart 3.1.4
+
+## Instalação
+
+### Caso seja um emulador:
+
+Clone o repositório: https://github.com/LeonardoMaito/escribo_teste_2.git
+
+Instale as dependências: `flutter pub get`
+
+Execute o aplicativo: `flutter run`
+
+### Caso seja um dispositivo físico:
+
+Instale o app-debug.apk localizado dentro desse repositório.
+
